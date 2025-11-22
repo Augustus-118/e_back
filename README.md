@@ -4,9 +4,11 @@ A backend service that aggregates real-time meme coin data from multiple DEX sou
 
 ## 🌐 Live Demo
 
-**API Endpoint:** `[YOUR_DEPLOYED_URL_HERE]/api/tokens?q=SOL`
+**API Endpoint:** https://e-back-ca4c.onrender.com/api/tokens?q=SOL
 
-**WebSocket:** Connect to `[YOUR_DEPLOYED_URL_HERE]` for real-time price updates
+**WebSocket:** Connect to `https://e-back-ca4c.onrender.com` for real-time price updates
+
+**GitHub Repository:** https://github.com/Augustus-118/e_back
 
 ## ✨ Features
 
