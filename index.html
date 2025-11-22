@@ -1,8 +1,177 @@
-socket.on('message', msg => {
-console.log('Server says:', msg);
-alert('Server says: ' + msg); // Optional: show alert
-});
-</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Demo - Real-time Token Updates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .status {
+            text-align: center;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .connected {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .updates {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .update-time {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .token-count {
+            font-size: 18px;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Real-time Token Updates via WebSocket</h1>
+
+    <div id="status" class="status disconnected">
+        Connecting to server...
+    </div>
+
+    <div class="updates">
+        <div class="update-time" id="lastUpdate">Waiting for updates...</div>
+        <div class="token-count" id="tokenCount">0 tokens</div>
+        <div id="tokenData">No data yet</div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+        // Connect to the live server
+        const socket = io('https://e-back-ca4c.onrender.com');
+
+        const statusDiv = document.getElementById('status');
+        const lastUpdateDiv = document.getElementById('lastUpdate');
+        const tokenCountDiv = document.getElementById('tokenCount');
+        const tokenDataDiv = document.getElementById('tokenData');
+
+        // Connection established
+        socket.on('connect', () => {
+            console.log('Connected to WebSocket server');
+            statusDiv.textContent = 'Connected to server';
+            statusDiv.className = 'status connected';
+        });
+
+        // Connection lost
+        socket.on('disconnect', () => {
+            console.log('Disconnected from server');
+            statusDiv.textContent = 'Disconnected from server';
+            statusDiv.className = 'status disconnected';
+        });
+
+        // Receive price updates
+        socket.on('price-update', (data) => {
+            console.log('Received update:', data);
+
+            // Update timestamp
+            const now = new Date().toLocaleTimeString();
+            lastUpdateDiv.textContent = `Last update: ${now}`;
+
+            // Update token count
+            tokenCountDiv.textContent = `${data.length} tokens received`;
+
+            // Display token data in table
+            if (data.length > 0) {
+                let tableHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Token</th>
+                                <th>Ticker</th>
+                                <th>Price (SOL)</th>
+                                <th>Volume</th>
+                                <th>Protocol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                data.slice(0, 10).forEach(token => {
+                    tableHTML += `
+                        <tr>
+                            <td>${token.token_name}</td>
+                            <td>${token.token_ticker}</td>
+                            <td>${token.price_sol.toFixed(6)}</td>
+                            <td>${token.volume_sol.toLocaleString()}</td>
+                            <td>${token.protocol}</td>
+                        </tr>
+                    `;
+                });
+
+                tableHTML += `
+                        </tbody>
+                    </table>
+                `;
+
+                tokenDataDiv.innerHTML = tableHTML;
+            } else {
+                tokenDataDiv.innerHTML = '<p>No token data available</p>';
+            }
+        });
+
+        // Error handling
+        socket.on('error', (error) => {
+            console.error('WebSocket error:', error);
+        });
+    </script>
 </body>
 
 </html>
