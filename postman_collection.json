@@ -1,0 +1,134 @@
+{
+    "info": {
+        "name": "Real-time DEX Aggregator API",
+        "description": "Collection for testing the Real-time Data Aggregation Service",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Get Tokens - SOL",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/tokens?q=SOL",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "tokens"
+                    ],
+                    "query": [
+                        {
+                            "key": "q",
+                            "value": "SOL",
+                            "description": "Search query for tokens"
+                        }
+                    ]
+                },
+                "description": "Fetch aggregated token data for SOL tokens from multiple DEX sources"
+            },
+            "response": []
+        },
+        {
+            "name": "Get Tokens - DOGE",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/tokens?q=DOGE",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "tokens"
+                    ],
+                    "query": [
+                        {
+                            "key": "q",
+                            "value": "DOGE"
+                        }
+                    ]
+                },
+                "description": "Fetch aggregated token data for DOGE tokens"
+            },
+            "response": []
+        },
+        {
+            "name": "Get Tokens - Default (SOL)",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/tokens",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "tokens"
+                    ]
+                },
+                "description": "Fetch tokens with default query (SOL)"
+            },
+            "response": []
+        },
+        {
+            "name": "Get Tokens - PEPE",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/tokens?q=PEPE",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "tokens"
+                    ],
+                    "query": [
+                        {
+                            "key": "q",
+                            "value": "PEPE"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Get Tokens - BTC",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/tokens?q=BTC",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "tokens"
+                    ],
+                    "query": [
+                        {
+                            "key": "q",
+                            "value": "BTC"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:3000",
+            "type": "string"
+        }
+    ]
+}
