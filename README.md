@@ -160,30 +160,6 @@ Updates are broadcast every 10 seconds to all connected clients.
 
 4. **Deploy!** 🎉
 
-### Deploy to Railway
-
-1. **Create account** at [railway.app](https://railway.app)
-2. **New Project** → Deploy from GitHub
-3. **Add Redis** from Railway marketplace
-4. **Deploy!**
-
-## 🧪 Testing
-
-### Manual Testing
-
-**Test REST API:**
-```bash
-curl http://localhost:3000/api/tokens?q=SOL
-```
-
-**Test WebSocket:**
-Open `index.html` in your browser to see live updates.
-
-### Unit Tests (Coming Soon)
-
-```bash
-npm test
-```
 
 ## 📁 Project Structure
 
@@ -227,38 +203,11 @@ e_back/
 - **How**: Strict mode enabled, interfaces for all data
 - **Benefit**: Catch bugs at compile time
 
-## 🐛 Known Issues & Limitations
 
-- Jupiter API provides limited data (no price/volume)
-- Rate limits: DexScreener (300 req/min)
-- Cache invalidation is time-based only
 
 ## 📝 Environment Variables
 
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `PORT` | Server port | No (default: 3000) |
-| `REDIS_URL` | Redis connection string | Yes |
-
-## 🤝 Contributing
-
-This is an internship assessment project. Contributions are not accepted.
-
-## 📄 License
-
-ISC
-
-## 👤 Author
-
-[Your Name]
-
-## 📞 Contact
-
-- GitHub: [Your GitHub]
-- Email: [Your Email]
-
----
-
-Built with ❤️ for [Company Name] Backend Internship Assessment
-# e_back
-# e_back
+| `REDIS_URL` | Redis connection string | Yes
